@@ -684,18 +684,21 @@ class OneTimePopupHandler:
             #clear all other keyboards
             if self.verbose:
                 print("Clearing out latin keyboard:")
+
             call(["adb", "shell", "pm", "clear", "com.google.android.inputmethod.latin"])
             sleep(2)
 
             #Clear hindi keyboard
             if self.verbose:
                 print("Clearing out hindi keyboard:")
+                
             call(["adb", "shell", "pm", "clear", "com.google.android.apps.inputmethod.hindi"])
             sleep(2)
 
             # Clear samsung keyboard
             if self.verbose:
                 print("Clearing out samsung keyboard:")
+
             call(["adb", "shell", "pm", "clear", "com.sec.android.inputmethod"])
             sleep(2)
 
