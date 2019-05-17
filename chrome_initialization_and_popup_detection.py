@@ -1,5 +1,5 @@
 from uiautomator import Device, JsonRPCError
-from subprocess import call
+from subprocess import call, check_output
 from timeout_decorator import timeout, TimeoutError
 from sys import argv
 from time import sleep, time, gmtime
@@ -677,9 +677,25 @@ class OneTimePopupHandler:
                     +"Failed to initialize test due to sporadic popups like system updates")
                 return False
 
-            call(["adb", "shell", "pm", "clear", "com.google.android.inputmethod.latin "])
+            if self.verbose:
+                print("=================LISTING PACKAGES======================")
+                print(str(check_output(["adb", "shell", "pm", "list packages"]), 'utf-8'))
+
+            #clear all other keyboards
+            if self.verbose:
+                print("Clearing out latin keyboard:")
+            call(["adb", "shell", "pm", "clear", "com.google.android.inputmethod.latin"])
             sleep(2)
 
+            #Clear hindi keyboard
+            if self.verbose:
+                print("Clearing out hindi keyboard:")
+            call(["adb", "shell", "pm", "clear", "com.google.android.apps.inputmethod.hindi"])
+            sleep(2)
+
+            # Clear samsung keyboard
+            if self.verbose:
+                print("Clearing out samsung keyboard:")
             call(["adb", "shell", "pm", "clear", "com.sec.android.inputmethod"])
             sleep(2)
 
