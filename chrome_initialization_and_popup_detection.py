@@ -680,6 +680,7 @@ class OneTimePopupHandler:
                 if self.verbose:
                     print("=================LISTING PACKAGES======================")
                     print(str(check_output(["adb", "shell", "cmd", "package", "list", "packages"]).encode("utf-8")))
+                    sleep(2)
             except Exception as e:
                     print("Could not list packages. Moving on.")
 
