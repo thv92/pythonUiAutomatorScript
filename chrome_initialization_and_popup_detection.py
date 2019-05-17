@@ -676,10 +676,12 @@ class OneTimePopupHandler:
                     self.start_time+" - "+generic_cloudwatch_log_prefix
                     +"Failed to initialize test due to sporadic popups like system updates")
                 return False
-
-            if self.verbose:
-                print("=================LISTING PACKAGES======================")
-                print(str(check_output(["adb", "shell", "cmd", "package", "list", "packages"]).encode("utf-8")))
+            try:
+                if self.verbose:
+                    print("=================LISTING PACKAGES======================")
+                    print(str(check_output(["adb", "shell", "cmd", "package", "list", "packages"]).encode("utf-8")))
+            except Exception as e:
+                    print("Could not list packages. Moving on.")
 
             #clear all other keyboards
             if self.verbose:
@@ -691,7 +693,7 @@ class OneTimePopupHandler:
             #Clear hindi keyboard
             if self.verbose:
                 print("Clearing out hindi keyboard:")
-                
+
             call(["adb", "shell", "pm", "clear", "com.google.android.apps.inputmethod.hindi"])
             sleep(2)
 
