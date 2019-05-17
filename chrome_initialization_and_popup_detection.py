@@ -679,7 +679,7 @@ class OneTimePopupHandler:
 
             if self.verbose:
                 print("=================LISTING PACKAGES======================")
-                print(str(check_output(["adb", "shell", "pm", "list packages"]), 'utf-8'))
+                print(str(check_output(["adb", "shell", "pm", "list packages"]).encode("utf-8")))
 
             #clear all other keyboards
             if self.verbose:
